@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: claude-api-wrapper
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: claude-api-wrapper
+  template:
+    metadata:
+      labels:
+        app: claude-api-wrapper
+    spec:
+      containers:
+        - name: claude-api-wrapper
+          image: claudeapiwrapperacr.azurecr.io/claude-api-wrapper:latest
+          ports:
+            - containerPort: 8000
+          env:
+            - name: ANTHROPIC_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: claude-secret
+                  key: ANTHROPIC_API_KEY
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 8000
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 8000
+            initialDelaySeconds: 10
+            periodSeconds: 20
