@@ -2,11 +2,11 @@
 
 A small FastAPI app that wraps the Claude API. Send it a question, get an answer.
 
-This is **Stage 1** of a 4-stage portfolio project:
-1. **FastAPI wrapper around Claude**  ← you are here
+This is a 4-stage portfolio project, all stages complete:
+1. FastAPI wrapper around Claude
 2. Dockerise it
 3. Deploy to AKS with Terraform
-4. Add CI/CD (GitHub Actions) + Kubernetes secrets
+4. CI/CD (GitHub Actions) + Kubernetes secrets ← live, deploying on every push to `main`
 
 ---
 
